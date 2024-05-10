@@ -26,8 +26,8 @@ const NavDesktop = () => {
         <Image
           src={BrandImage}
           alt="brand"
-          width={"auto"}
-          height={"auto"}
+          width={100}
+          height={100}
           priority
         />
       </div>
