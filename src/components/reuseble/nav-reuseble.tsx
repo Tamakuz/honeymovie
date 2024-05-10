@@ -90,7 +90,7 @@ const NavMobile = () => {
       </div>
       <div className="flex flex-col items-center gap-1">
         <ProfileAtomic />
-        <p className="text-xs">Profile</p>
+        <p className="text-xs">Profil</p>
       </div>
     </div>
   );
