@@ -16,9 +16,9 @@ export const authOption: AuthOptions = {
   ],
   callbacks: {
     signIn: async ({ user, account }) => {
-      if (user && account) {
-        await createUser({email: user.email, name: user.name, provider: account.provider});
-      }
+      // if (user && account) {
+      //   await createUser({email: user.email, name: user.name, provider: account.provider});
+      // }
       return true
     }
   }
