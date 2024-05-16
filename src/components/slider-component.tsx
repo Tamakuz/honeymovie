@@ -1,6 +1,5 @@
 "use client";
-import { fetcher } from "@/lib/utils";
-import React, { useEffect } from "react";
+import useSWR from "swr";
 import {
   Carousel,
   CarouselContent,
@@ -12,46 +11,22 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSearchParams } from "next/navigation";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { fetcher } from "@/lib/utils";
 
 const SliderComponent = () => {
   const params = useSearchParams();
-  const queryClient = useQueryClient();
   const curentParamsUrl = params.get("category");
 
-  useEffect(() => {
-    // Fetch new data when currentParamsQuery changes
-    const fetchData = async () => {
-      switch (curentParamsUrl) {
-        case "movie":
-          await queryClient.prefetchQuery({
-            queryKey: ["slider"],
-            queryFn: () => fetcher("/movie/now_playing", 1),
-          });
-          break;
-        case "tvshow":
-          await queryClient.prefetchQuery({
-            queryKey: ["slider"],
-            queryFn: () => fetcher("/tv/airing_today", 1),
-          });
-          break;
-        default:
-          break;
-      }
-    };
-
-    if (curentParamsUrl) {
-      fetchData();
-    }
-  }, [curentParamsUrl, queryClient]);
-
-  const { data, isLoading }: any = useQuery({
-    queryKey: ["slider"]
-  });
+  const { data, error } = useSWR(
+    `https://api.themoviedb.org/3/${
+      curentParamsUrl === "movie" ? "movie" : "tv"
+    }/popular?api_key=${process.env.NEXT_PUBLIC_APIKEY_TMDB!}`,
+    fetcher
+  );
 
   return (
     <div className="rounded-3xl overflow-hidden w-full relative">
-      {isLoading ? (
+      {!data && !error ? (
         <Skeleton className="h-[500px] w-full rounded-xl bg-[#21242D]" />
       ) : (
         <Carousel

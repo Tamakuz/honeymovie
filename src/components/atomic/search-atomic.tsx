@@ -3,7 +3,7 @@ import React from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaFilter } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface Genre {
   id: number;
@@ -11,12 +11,19 @@ interface Genre {
 }
 
 const SearchAtomic = () => {
+  const router = useRouter();
   const params = useSearchParams();
 
   const changeQuery = (e: React.FormEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value);
-    
-    // changeQueryParams("query", e.currentTarget.value.replace(/ /g, "+"));
+    router.push(
+      `?category=${params.get("category")}&query=${e.currentTarget.value}`
+    );
+    if (e.currentTarget.value !== "")
+      router.push(
+        `/discover?category=${params.get("category")}&query=${
+          e.currentTarget.value
+        }`
+      );
   };
 
   return (
@@ -24,7 +31,7 @@ const SearchAtomic = () => {
       <div className="bg-[#21242D] rounded-md flex justify-center items-center px-3 ">
         <CiSearch />
         <Input
-          onChange={(e : React.FormEvent<HTMLInputElement>) => changeQuery(e)}
+          onChange={(e: React.FormEvent<HTMLInputElement>) => changeQuery(e)}
           type="Text"
           placeholder="Search"
           className="bg-[#21242D] w-[300px] h-9 ring-0 focus-visible:ring-offset-0 focus-visible:ring-0 border-none"

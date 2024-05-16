@@ -3,19 +3,19 @@ import { Plus, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-type CardMovieReusebleProps = {
-  idMovie: number;
+type CardTvReusebleProps = {
+  idTv: number;
   title: string;
   poster_path: string;
   vote_average: number;
 };
 
-const CardMovieReuseble = ({
-  idMovie,
+const CardTvReuseble = ({
+  idTv,
   title,
   poster_path,
   vote_average,
-}: CardMovieReusebleProps) => {
+}: CardTvReusebleProps) => {
   const vote = Math.floor(vote_average * 10) / 10;
 
   return (
@@ -44,7 +44,7 @@ const CardMovieReuseble = ({
             size="icon"
             className="bg-primary hover:bg-primary text-black grow font-extrabold"
           >
-            <Link href={`/${idMovie}/movie`}>More Info</Link>
+            <Link href={`/${idTv}/tv`}>More Info</Link>
           </Button>
         </div>
       </div>
@@ -54,4 +54,4 @@ const CardMovieReuseble = ({
   );
 };
 
-export default CardMovieReuseble;
+export default CardTvReuseble;
