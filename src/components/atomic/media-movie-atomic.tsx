@@ -74,7 +74,7 @@ const MediaMovieAtomic = ({ idMovie }: { idMovie: string }) => {
           </Link>
         </div>
       </div>
-      <div className={`grid grid-cols-${tab === "posters" ? 5 : 2} gap-3`}>
+      <div className={`grid ${tab === "posters" ? "grid-cols-5" : "grid-cols-2"} gap-3`}>
         {tab === "videos" &&
           dataVIdeoMovie?.results
             .slice(0, 2)
