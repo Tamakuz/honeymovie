@@ -4,34 +4,40 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 type CardMovieReusebleProps = {
-  idMovie: number;
+  selfLink: string;
   title: string;
   poster_path: string;
   vote_average: number;
+  eps?: string | undefined;
 };
 
 const CardMovieReuseble = ({
-  idMovie,
+  selfLink,
   title,
   poster_path,
   vote_average,
+  eps,
 }: CardMovieReusebleProps) => {
-  const vote = Math.floor(vote_average * 10) / 10;
+const vote = Math.floor(vote_average * 10) / 10;
 
   return (
     <div className="rounded-2xl overflow-hidden w-fit relative">
-      <img
-        className="w-[200px]"
-        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-        alt=""
-        loading="lazy"
-      />
+      <img className="w-[200px]" src={poster_path} alt="" loading="lazy" />
       <div className="z-10 absolute top-0 w-full h-full p-5 flex flex-col justify-between">
-        <div className="flex justify-between items-center">
-          <p className="font-extrabold text-[20px] line-clamp-1">{title}</p>
-          <div className="flex items-center gap-1">
-            <Star className="text-primary" /> {vote}
+        <div>
+          <div className="flex justify-between items-center">
+            <p className="font-extrabold text-[20px] line-clamp-1">{title}</p>
+            <div className="flex items-center gap-1">
+              <Star className="text-primary" /> {vote}
+            </div>
           </div>
+          {eps && (
+            <div className="w-full flex justify-center items-center">
+              <div className="size-14  rounded-full flex items-center justify-center border-2 border-white border-dashed">
+                <span>{eps} eps</span>
+              </div>
+            </div>
+          )}
         </div>
         <div className="flex justify-between items-center gap-3">
           <Button
@@ -44,12 +50,12 @@ const CardMovieReuseble = ({
             size="icon"
             className="bg-primary hover:bg-primary text-black grow font-extrabold"
           >
-            <Link href={`/${idMovie}/movie`}>More Info</Link>
+            <Link href={selfLink}>Watch Now</Link>
           </Button>
         </div>
       </div>
-      <div className="absolute top-0 w-full h-full bg-gradient-to-b from-black opacity-70"></div>
-      <div className="absolute top-0 w-full h-full bg-gradient-to-t from-black opacity-70"></div>
+      <div className="absolute top-0 w-full h-full bg-gradient-to-b from-black opacity-30"></div>
+      <div className="absolute top-0 w-full h-full bg-gradient-to-t from-black opacity-30"></div>
     </div>
   );
 };

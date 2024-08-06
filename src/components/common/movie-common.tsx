@@ -8,9 +8,9 @@ const MovieCommon = ({ idMovie }: { idMovie: string }) => {
   return (
     <div className="w-full space-y-5 overflow-auto scrollbar-none">
       <HeroMovieAtomic idMovie={idMovie} />
-      <CastCrewMovieAtomic idMovie={idMovie} />
+      {/* <CastCrewMovieAtomic idMovie={idMovie} />
       <MediaMovieAtomic idMovie={idMovie} />
-      <RecomendationMovieAtomic idMovie={idMovie} />
+      <RecomendationMovieAtomic idMovie={idMovie} /> */}
     </div>
   );
 };
